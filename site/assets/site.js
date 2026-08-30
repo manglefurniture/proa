@@ -1,4 +1,20 @@
-['assets/pages.css','assets/premium.css','assets/header.css'].forEach(href=>{if(!document.querySelector(`link[href="${href}"]`)){const link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.appendChild(link);}});
+const scriptElement=[...document.scripts].find(script=>/assets\/site\.js(?:\?|$)/.test(script.src));
+const assetVersion=scriptElement?new URL(scriptElement.src,window.location.href).searchParams.get('v'):null;
+const assetSuffix=assetVersion?`?v=${encodeURIComponent(assetVersion)}`:'';
+
+['pages.css','premium.css','header.css'].forEach(file=>{
+  const baseHref=`assets/${file}`;
+  const alreadyLoaded=[...document.querySelectorAll('link[rel="stylesheet"]')].some(link=>{
+    const href=link.getAttribute('href')||'';
+    return href===baseHref||href.startsWith(`${baseHref}?`);
+  });
+  if(!alreadyLoaded){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href=`${baseHref}${assetSuffix}`;
+    document.head.appendChild(link);
+  }
+});
 
 const topbar=document.querySelector('.topbar');
 const menuButton=document.querySelector('.menu-btn');

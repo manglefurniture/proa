@@ -27,6 +27,22 @@ jobs:
           cp public/assets/PROA-logo.webp site/assets/PROA-logo.webp
           touch site/.nojekyll
 
+      - name: Version static assets
+        run: |
+          python - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          version = os.environ['GITHUB_SHA'][:12]
+          pattern = re.compile(r'(?P<url>assets/[^"\s>]+\.(?:css|js|webp))(?P<query>\?v=[^"\s>]*)?')
+
+          for path in Path('site').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              text = pattern.sub(lambda match: f"{match.group('url')}?v={version}", text)
+              path.write_text(text, encoding='utf-8')
+          PY
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
