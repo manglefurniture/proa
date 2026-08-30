@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# Demo no indexable. Sustituir esta política antes de producción pública real.
