@@ -4,13 +4,17 @@ Sitio demo de PROA Nadadores construido sobre los principios y módulos reutiliz
 
 ## Estado
 
-Bootstrap inicial del proyecto.
+Frontend público implementado como sitio estático para **GitHub Pages**.
+
+El backend, persistencia, autenticación y administración real se incorporarán posteriormente al migrar el proyecto al VPS.
 
 ## Entorno de demo
 
 - Host previsto: `https://proa.hacheinteractive.com`
 - Zona horaria: `America/Cancun`
 - Estado SEO inicial: demo/no indexable hasta validación de contenido y datos oficiales.
+- Fuente estática de Pages: `site/`
+- Logo oficial usado por el build: `public/assets/PROA-logo.webp`
 
 ## Principios
 
@@ -24,15 +28,20 @@ Bootstrap inicial del proyecto.
 
 ## Estructura
 
-- `public/` — sitio público y entrada al admin.
+- `site/` — frontend estático publicado en GitHub Pages.
+- `public/` — futura superficie PHP/VPS y activos compartidos.
 - `app/` — bootstrap de aplicación.
 - `config/` — configuración no sensible y valores por defecto.
 - `src/Application/` — casos de uso/controladores de aplicación.
 - `src/Domain/` — reglas de negocio PROA.
 - `src/Infrastructure/` — persistencia e integraciones.
-- `templates/` — layout y parciales reutilizables.
+- `templates/` — layout y parciales reutilizables para la etapa VPS.
 - `docs/` — perfil, arquitectura y decisiones del proyecto.
+
+## Publicación
+
+`.github/workflows/pages.yml` copia el logo real de PROA al artefacto estático y despliega `site/` mediante GitHub Pages cuando cambia `main`.
 
 ## Próximo paso
 
-Construir identidad visual, contenido y módulos funcionales sobre esta base, manteniendo cada cambio pequeño y trazable.
+Validar visualmente el demo y, una vez aprobado, migrarlo al VPS conservando el frontend y conectando backend, Admin y datos dinámicos sobre la arquitectura ya preparada.
