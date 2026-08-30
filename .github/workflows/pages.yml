@@ -35,7 +35,7 @@ jobs:
           from pathlib import Path
 
           version = os.environ['GITHUB_SHA'][:12]
-          pattern = re.compile(r'(?P<url>assets/[^"\'\s>]+\.(?:css|js|webp))(?P<query>\?v=[^"\'\s>]*)?')
+          pattern = re.compile(r'(?P<url>assets/[^"\s>]+\.(?:css|js|webp))(?P<query>\?v=[^"\s>]*)?')
 
           for path in Path('site').glob('*.html'):
               text = path.read_text(encoding='utf-8')
